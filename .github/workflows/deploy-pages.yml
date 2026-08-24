@@ -1,0 +1,35 @@
+name: Deploy Episode
+
+on:
+  push:
+    tags:
+      - "episode-*"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Prepare site
+        run: |
+          mkdir -p _site/episode-${GITHUB_REF_NAME#episode-}
+          cp index.html main.js style.css _site/episode-${GITHUB_REF_NAME#episode-}/
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy
+        uses: actions/deploy-pages@v4
