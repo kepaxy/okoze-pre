@@ -58,6 +58,9 @@ jobs:
               | tar -x -C "_site/episode-${episode}"
           done
 
+          echo "=== Generated site ==="
+          find _site -type f | sort
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
