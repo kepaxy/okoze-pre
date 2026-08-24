@@ -1,12 +1,7 @@
-name: Deploy Episode
+name: Deploy Episodes
 
 on:
   workflow_dispatch:
-    inputs:
-      tag:
-        description: "Episode tag to deploy"
-        required: true
-        default: "episode-001"
 
 permissions:
   contents: read
@@ -18,21 +13,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.tag }}
+          fetch-depth: 0
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Prepare site
         run: |
-          episode="${TAG#episode-}"
-          mkdir -p "_site/episode-${episode}"
-          cp index.html main.js style.css "_site/episode-${episode}/"
-        env:
-          TAG: ${{ inputs.tag }}
+          rm -rf _site
+          mkdir -p _site
+
+          for tag in episode-001 episode-002; do
+            episode="${tag#episode-}"
+            mkdir -p "_site/episode-${episode}"
+
+            git archive "$tag" \
+              index.html main.js style.css \
+              | tar -x -C "_site/episode-${episode}"
+          done
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
