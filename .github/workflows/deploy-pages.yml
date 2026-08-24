@@ -1,7 +1,13 @@
 name: Deploy Episodes
 
 on:
-  workflow_dispatch:
+  push:
+    tags:
+      - "episode-*"
+
+  delete:
+    tags:
+      - "episode-*"
 
 permissions:
   contents: read
@@ -17,6 +23,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          fetch-tags: true
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
