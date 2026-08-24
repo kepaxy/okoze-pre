@@ -1,10 +1,12 @@
 name: Deploy Episode
 
 on:
-  push:
-    tags:
-      - "episode-*"
   workflow_dispatch:
+    inputs:
+      tag:
+        description: "Episode tag to deploy"
+        required: true
+        default: "episode-001"
 
 permissions:
   contents: read
@@ -18,14 +20,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Prepare site
         run: |
-          mkdir -p _site/episode-${GITHUB_REF_NAME#episode-}
-          cp index.html main.js style.css _site/episode-${GITHUB_REF_NAME#episode-}/
+          episode="${TAG#episode-}"
+          mkdir -p "_site/episode-${episode}"
+          cp index.html main.js style.css "_site/episode-${episode}/"
+        env:
+          TAG: ${{ inputs.tag }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
