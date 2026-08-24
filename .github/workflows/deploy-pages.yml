@@ -26,8 +26,10 @@ jobs:
           rm -rf _site
           mkdir -p _site
 
-          for tag in episode-001 episode-002; do
+          for tag in $(git tag -l 'episode-*' --sort=version:refname); do
             episode="${tag#episode-}"
+            echo "Deploying ${tag}"
+
             mkdir -p "_site/episode-${episode}"
 
             git archive "$tag" \
