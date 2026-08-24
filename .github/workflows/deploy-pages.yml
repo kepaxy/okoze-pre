@@ -5,12 +5,22 @@ on:
     tags:
       - "episode-*"
 
+  delete:
+
 permissions:
   contents: read
   pages: write
   id-token: write
 
 jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "event: ${{ github.event_name }}"
+          echo "ref: ${{ github.ref }}"
+          echo "ref_name: ${{ github.ref_name }}"
+
   deploy:
     if: >
       github.event_name == 'push' ||
