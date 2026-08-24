@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
-import sys
 from pathlib import Path
+
+
+WIKI_DIR = Path("../okoze-pre.wiki")
 
 
 def get_title(path):
@@ -50,13 +52,11 @@ def make_section(title, pages):
     return lines
 
 
-def make_home(wiki_dir):
+def make_contents(wiki_dir):
     episodes, columns = collect_pages(wiki_dir)
 
     lines = [
-        "# okoze Development Series",
-        "",
-        "This wiki is the development log for the okoze project.",
+        "# Contents",
         "",
     ]
 
@@ -67,21 +67,15 @@ def make_home(wiki_dir):
 
 
 def main():
-    if len(sys.argv) != 2:
-        print(f"Usage: {sys.argv[0]} WIKI_DIRECTORY", file=sys.stderr)
-        sys.exit(1)
+    if not WIKI_DIR.is_dir():
+        raise SystemExit(f"Directory not found: {WIKI_DIR}")
 
-    wiki_dir = Path(sys.argv[1])
+    contents = make_contents(WIKI_DIR)
+    contents_path = WIKI_DIR / "Contents.md"
 
-    if not wiki_dir.is_dir():
-        print(f"Directory not found: {wiki_dir}", file=sys.stderr)
-        sys.exit(1)
+    contents_path.write_text(contents + "\n", encoding="utf-8")
 
-    home = make_home(wiki_dir)
-    home_path = wiki_dir / "Home.md"
-    home_path.write_text(home + "\n", encoding="utf-8")
-
-    print(f"Generated {home_path}")
+    print(f"Generated {contents_path}")
 
 
 if __name__ == "__main__":
