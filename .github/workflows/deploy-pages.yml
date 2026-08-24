@@ -47,6 +47,20 @@ jobs:
           rm -rf _site
           mkdir -p _site
 
+          cat > _site/index.html <<'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>okoze-pre Live Demo</title>
+          </head>
+          <body>
+            <h1>okoze-pre Live Demo</h1>
+            <h2>Episodes</h2>
+            <ul>
+          EOF
+
           for tag in $(git tag -l 'episode-*' --sort=version:refname); do
             episode="${tag#episode-}"
             echo "Deploying ${tag}"
@@ -56,10 +70,16 @@ jobs:
             git archive "$tag" \
               index.html main.js style.css \
               | tar -x -C "_site/episode-${episode}"
+
+            echo "              <li><a href=\"./episode-${episode}/\">Episode ${episode}</a></li>" \
+              >> _site/index.html
           done
 
-          echo "=== Generated site ==="
-          find _site -type f | sort
+          cat >> _site/index.html <<'EOF'
+            </ul>
+          </body>
+          </html>
+          EOF
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
