@@ -34,16 +34,36 @@ def collect_pages(wiki_dir):
     return episodes, columns
 
 
-def print_section(title, pages):
-    print(f"## {title}")
-    print()
+def make_section(title, pages):
+    lines = [
+        f"## {title}",
+        "",
+    ]
 
     for path in pages:
         page_name = path.stem
         page_title = get_title(path)
-        print(f"* [{page_title}]({page_name})")
+        lines.append(f"* [{page_title}]({page_name})")
 
-    print()
+    lines.append("")
+
+    return lines
+
+
+def make_home(wiki_dir):
+    episodes, columns = collect_pages(wiki_dir)
+
+    lines = [
+        "# okoze Development Series",
+        "",
+        "This wiki is the development log for the okoze project.",
+        "",
+    ]
+
+    lines.extend(make_section("Episodes", episodes))
+    lines.extend(make_section("Columns", columns))
+
+    return "\n".join(lines)
 
 
 def main():
@@ -57,15 +77,11 @@ def main():
         print(f"Directory not found: {wiki_dir}", file=sys.stderr)
         sys.exit(1)
 
-    episodes, columns = collect_pages(wiki_dir)
+    home = make_home(wiki_dir)
+    home_path = wiki_dir / "Home.md"
+    home_path.write_text(home + "\n", encoding="utf-8")
 
-    print("# okoze Development Series")
-    print()
-    print("This wiki is the development log for the okoze project.")
-    print()
-
-    print_section("Episodes", episodes)
-    print_section("Columns", columns)
+    print(f"Generated {home_path}")
 
 
 if __name__ == "__main__":
