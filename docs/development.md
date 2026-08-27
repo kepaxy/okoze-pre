@@ -76,7 +76,7 @@ Each feature is developed on its own branch.
 When the feature is complete, a pull request is created and the branch
 is merged into `main`.
 
-The `main` branch should remain in a working state.
+The `main` branch is protected by a GitHub ruleset. Development is done on feature branches and merged through pull requests.
 
 The exact Git merge strategy is not considered part of the development
 methodology and may be changed as the project evolves.
