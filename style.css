@@ -1,7 +1,9 @@
+body {
+  margin: 20px;
+  background: #eee;
+}
+
 canvas {
-  border: 1px solid black;
-  /* canvasを画面いっぱいに広げる */
-  width: 100%;
-  height: 100%; /* 横幅いっぱいに合わせるなら 100vh にします */
-  display: block; /* 下部に謎の隙間ができるのを防ぐ */
+  background: white;
+  border: 1px solid #999;
 }
