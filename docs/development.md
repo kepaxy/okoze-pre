@@ -7,7 +7,7 @@ experimental project rather than a large team.
 
 ## Features and Tests
 
-Features are listed in `docs/feature.md`.
+Features are listed in [`docs/feature.md`](https://github.com/kepaxy/okoze-pre/blob/main/docs/feature.md).
 
 Each feature has an ID such as `1B1`. The ID is used consistently
 in branches, commits, tests, and other development records.
