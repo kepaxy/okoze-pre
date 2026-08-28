@@ -7,7 +7,6 @@ experimental project rather than a large team.
 
 ## Features and Tests
 
-
 Each feature has an ID such as `1B1`. The ID is used consistently
 in branches, commits, tests, and other development records.
 
@@ -46,9 +45,8 @@ The other tests are recorded in the commit message body.
 
 For example:
 
-    🟢 The Canvas can fill the available window
-    
-    🟢 The Canvas can be resized when the window size changes
+    git commit -m "🟢 The Canvas can fill the available window" \
+    -m "🟢 The Canvas can be resized when the window size changes"
 
 When there is no suitable representative test, the test information can be recorded in the commit message body instead.
 
