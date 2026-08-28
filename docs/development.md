@@ -28,17 +28,17 @@ been implemented and the test passes.
 
 For example:
 
-    🔴 1B1 The Canvas can fill the available window
-    🔴 1B1 The Canvas can be resized when the window size changes
+    🔴 The Canvas can fill the available window
+    🔴 The Canvas can be resized when the window size changes
 
 After implementing the required behavior:
 
-    🟢 1B1 The Canvas can fill the available window
-    🟢 1B1 The Canvas can be resized when the window size changes
+    🟢 The Canvas can fill the available window
+    🟢 The Canvas can be resized when the window size changes
 
 The Green tests are committed to Git:
 
-    git commit -m "🟢 1B1 The Canvas can fill the available window"
+    git commit -m "🟢 The Canvas can fill the available window"
 
 If several tests become Green as part of the same change, the commit
 message uses one representative test. The other tests remain visible
