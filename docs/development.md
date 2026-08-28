@@ -40,9 +40,17 @@ The Green tests are committed to Git:
 
     git commit -m "🟢 The Canvas can fill the available window"
 
-If several tests become Green as part of the same change, the commit
-message uses one representative test. The other tests remain visible
-in the commit history and in the test records.
+If several tests become Green as part of the same change, the commit message uses one representative test as its subject.
+
+The other tests are recorded in the commit message body.
+
+For example:
+
+    🟢 The Canvas can fill the available window
+    
+    🟢 The Canvas can be resized when the window size changes
+
+When there is no suitable representative test, the test information can be recorded in the commit message body instead.
 
 ## Refactoring
 
