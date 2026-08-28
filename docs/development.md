@@ -7,7 +7,6 @@ experimental project rather than a large team.
 
 ## Features and Tests
 
-Features are listed in [`docs/feature.md`](https://github.com/kepaxy/okoze-pre/blob/main/docs/feature.md).
 
 Each feature has an ID such as `1B1`. The ID is used consistently
 in branches, commits, tests, and other development records.
@@ -15,7 +14,7 @@ in branches, commits, tests, and other development records.
 Development is driven by tests.
 
 Before implementing a feature, I decide what the feature is and record
-it in `docs/feature.md`.
+it in [`docs/features.md`](https://github.com/kepaxy/okoze-pre/blob/main/docs/features.md).
 
 I then create a branch for the feature and record the start of the
 feature with an empty commit:
